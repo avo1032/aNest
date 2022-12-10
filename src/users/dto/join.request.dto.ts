@@ -1,5 +1,7 @@
+import { IsNotEmpty, IsString } from "class-validator";
+
 export class JoinRequestDto {
-  public email: string;
-  public nickname: string;
-  public password: string;
+  @IsString() @IsNotEmpty() public email: string;
+  @IsString() public nickname: string;
+  @IsString() public password: string;
 }

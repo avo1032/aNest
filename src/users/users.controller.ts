@@ -1,24 +1,14 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, UseGuards } from '@nestjs/common';
 import { JoinRequestDto } from './dto/join.request.dto';
 import { UsersService } from './users.service';
 
 @Controller('users')
 export class UsersController {
   constructor(private usersService: UsersService) {}
-  @Get()
-  getUsers() {}
 
   @Post()
-  postUsers(@Body() data: JoinRequestDto) {
-    this.usersService.postUsers(data);
+  async signUp(@Body() body: JoinRequestDto){
+    return await this.usersService.signUp(body);
   }
 
-  @Post('login')
-  logIn() {}
-
-  @Post('logout')
-  logOut(@Req() req, @Res() res) {
-    req.logout();
-    res.clearCookie('connect.sid', { httpOnly: true });
-  }
 }
